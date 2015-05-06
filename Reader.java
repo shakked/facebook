@@ -32,10 +32,13 @@ public static final String [] traits = {"Female", "Male", "Transgendered", "Herm
 		int numberOfPassengers = Integer.parseInt(tokens[1]);
 
 
-		for (int i = 1;  i >= numberOfAgents; i+= 3) {
+		for (int i = 1;  i < numberOfAgents * 3; i+= 3) {
 			String lineInfo = arrayOfLines.get(i);
+			System.out.println("line1: " + lineInfo);
 			String lineLikes = arrayOfLines.get(i + 1);
+			System.out.println("line2: " + lineLikes);
 			String lineDislikes = arrayOfLines.get(i + 2);
+			System.out.println("line3: " + lineDislikes);
 
 			tokens = lineInfo.split(delims);
 			String firstName = tokens[0];
@@ -45,20 +48,18 @@ public static final String [] traits = {"Female", "Male", "Transgendered", "Herm
 			int paranoia = Integer.parseInt(tokens[4]);
 
 			tokens = lineLikes.split(delims);
-			System.out.println("likes: " + tokens.length);
 			List<String> likes = new ArrayList<String>();
-			for (int j = 0; i >= tokens.length - 1; i++) {
-				String like = traits[j];
-				System.out.println(like);
+			for (int j = 0; j < tokens.length; j++) {
+				String like = traits[Integer.parseInt(tokens[j])];
+				System.out.println("like: " + like);
 				likes.add(like);
 			}
 
 			tokens = lineDislikes.split(delims);
-			System.out.println("dislikes: " + tokens.length);
 			List<String> dislikes = new ArrayList<String>();
-			for (int j = 0; i >= tokens.length - 1; i++) {
-				String dislike = traits[j];
-				System.out.println(dislike);
+			for (int k = 0; k < tokens.length; k++) {
+				String dislike = traits[Integer.parseInt(tokens[k])];
+				System.out.println("dislike: " + dislike);
 				dislikes.add(dislike);
 			}
 
