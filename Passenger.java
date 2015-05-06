@@ -34,6 +34,7 @@ public class Passenger {
 		if (dangerLevel < 0 || dangerLevel > 10) {
 			dangerLevel = 5;
 		}
+
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
@@ -42,6 +43,11 @@ public class Passenger {
 		this.species = species;
 		this.dangerLevel = dangerLevel;
 		this.isThreat = isThreat;
+	}
+
+	public String toString() { 
+		String description = "Passenger: " + firstName + " " + lastName + " age: " + age + " gender: " + gender + " origin: " + origin + " species: " + species + " dangerLevel: " + dangerLevel + " isThreat: " + isThreat;
+		return description;
 	}
 
 }
