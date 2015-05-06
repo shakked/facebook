@@ -8,6 +8,7 @@ public class Reader {
 	public static final String [] traits = {"Female", "Male", "Transgendered", "Hermaphrodite", "Epicene", "USA", "Canada", "Central America", "South America", "Western Europe", "Eastern Europe", "Middle Eastern", "North African", "African", "South Asian", "South East Asian", "Asian", "Aussie", "Kiwi", "Polynesian", "Outer Space", "Antarctican", "Lowest levels of the deep sea", "human", "alien", "ancients", "monster", "mutants"};
 	public ArrayList<Agent> agents = new ArrayList<Agent>();
 	public ArrayList<Passenger> passengers = new ArrayList<Passenger>();
+	public ArrayList<PriorityQueue<Passenger>> lines = new ArrayList<PriorityQueue<Passenger>>();
 
 	public ArrayList<String> arrayOfLinesForFileName(String fileName) throws IOException {
 		DataInputStream input = new DataInputStream(new FileInputStream(fileName));
@@ -100,6 +101,18 @@ public class Reader {
 	public void sortAgents() {
 		Collections.sort(this.agents);
 		Collections.reverse(this.agents);
+	}
+
+	public void buildLines() {
+		for (int i = 0; i < this.agents.length; i++) {
+			PriorityQueue priorityQueue = new PriorityQueue<Passenger>();
+			this.lines.add(priorityQueue);
+		}
+
+		for (int j = 0; i < this.passengers.length; j++) {
+			
+		}
+
 	}
 
 

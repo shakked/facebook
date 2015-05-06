@@ -1,4 +1,4 @@
-public class Passenger {
+public class Passenger implements Comparable<Passenger>{
 	public String firstName;
 	public String lastName;
 	public int age;
@@ -50,4 +50,13 @@ public class Passenger {
 		return description;
 	}
 
+	public int compareTo(Passenger passenger){
+		if(this.dangerLevel == passenger.dangerLevel) {
+			return 0;  
+		} else if(this.dangerLevel > passenger.dangerLevel) {
+			return 1;
+		} else {
+			return -1;
+		}  
+   }
 }
