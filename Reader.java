@@ -7,6 +7,7 @@ public class Reader {
 
 	public static final String [] traits = {"Female", "Male", "Transgendered", "Hermaphrodite", "Epicene", "USA", "Canada", "Central America", "South America", "Western Europe", "Eastern Europe", "Middle Eastern", "North African", "African", "South Asian", "South East Asian", "Asian", "Aussie", "Kiwi", "Polynesian", "Outer Space", "Antarctican", "Lowest levels of the deep sea", "human", "alien", "ancients", "monster", "mutants"};
 	public ArrayList<Agent> agents = new ArrayList<Agent>();
+	public ArrayList<Passenger> passengers = new ArrayList<Passenger>();
 
 	public ArrayList<String> arrayOfLinesForFileName(String fileName) throws IOException {
 		DataInputStream input = new DataInputStream(new FileInputStream(fileName));
@@ -104,13 +105,13 @@ public class Reader {
 			System.out.println("isThreat" + isThreat);
 
 			Passenger passenger = new Passenger(firstName, lastName, age, gender, origin, species, dangerLevel, isThreat);
-			this.agents.add(agent);
+			this.passengers.add(passenger);
 		}
 
 	}
 
-	public boolean intToBool(String intToBeConverted) {
-		if (intToBeConverted == "1") {
+	public boolean intToBool(int intToBeConverted) {
+		if (intToBeConverted == 1) {
 			return true;
 		} else {
 			return false;
@@ -121,7 +122,9 @@ public class Reader {
 	public static void main (String[] args) throws IOException{
 		Reader reader = new Reader();
 		reader.buildAgents();
+		reader.buildPassengers();
 		System.out.println(reader.agents); 
+		System.out.println(reader.passengers);
 
 	}
 }
