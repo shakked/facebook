@@ -15,9 +15,7 @@ public class Agent {
 	public ArrayList<String> likes;
 	public ArrayList<String> dislikes;
 
-	public Agent(String firstName, String lastName, int age,
-				 int gender, int paranoiaLevel, ArrayList<String> likes, ArrayList<String> dislikes) {
-
+	public Agent(String firstName, String lastName, int age, int gender, int paranoiaLevel, ArrayList<String> likes, ArrayList<String> dislikes) {
 		if (firstName == null || firstName.length() <= 0) {
 			firstName = "invalid first name given";
 		}
@@ -48,5 +46,14 @@ public class Agent {
 		this.likes = likes;
 		this.dislikes = dislikes;
 	}
-	
+
+	public Agent() {
+
+	}
+
+	public String toString() {
+		String string = "Agent: " + firstName + " " + lastName + ", " + age + " years old, " + paranoiaLevel + "paranoia level" + "likes: " + likes + " and dislikes: " + dislikes;
+		return string; 
+	}
+
 }

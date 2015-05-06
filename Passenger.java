@@ -1,7 +1,4 @@
 public class Passenger {
-//	Name LastName age gender origin species dangerLevel isThreat
-//	Maggie Simpson 3    0      5      23      0            0
-
 	public String firstName;
 	public String lastName;
 	public int age;
@@ -11,9 +8,11 @@ public class Passenger {
 	public int dangerLevel;
 	public boolean isThreat;
 
-	public Passenger (String firstName, String lastName, 
-					  int age, int gender, String origin, 
-					  String species, int dangerLevel, boolean isThreat) {
+	public Passenger() {
+
+	}
+
+	public Passenger(String firstName, String lastName, int age, int gender, String origin, String species, int dangerLevel, boolean isThreat) {
 		if (firstName == null || firstName.length() <= 0) {
 			firstName = "invalid first name given";
 		}
