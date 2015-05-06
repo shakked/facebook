@@ -1,5 +1,5 @@
 import java.util.*;
-public class Agent {
+public class Agent implements Comparator<Agent>, Comparable<Agent>{
 // Name LastName age gender paranoia
 // Like1 like2 like3 ...
 // dislike1 dislike2 dislike3...
@@ -47,9 +47,19 @@ public class Agent {
 		this.dislikes = dislikes;
 	}
 
-	public Agent() {
+	public int compareTo(Agent agent){
+		if(this.age == agent.age) {
+			return 0;  
+		} else if(this.age >agent.age) {
+			return 1;
+		} else {
+			return -1;
+		}  
+   }
 
-	}
+   public int compare(Agent a, Agent b){
+      return a.age - b.age;
+   }
 
 	public String toString() {
 		String string = "\n{ Agent: " + firstName + " " + lastName + "\nage: " + age + "\nparanoia level: " + paranoiaLevel + "\nlikes: " + likes + "\ndislikes: " + dislikes + "}\n";

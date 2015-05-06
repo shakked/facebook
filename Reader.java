@@ -31,8 +31,7 @@ public class Reader {
 		int numberOfAgents = Integer.parseInt(tokens[0]);
 		int numberOfPassengers = Integer.parseInt(tokens[1]);
 
-
-		for (int i = 1;  i < numberOfAgents * 3; i+= 3) {
+		for (int i = 1;  i < 1 + numberOfAgents * 3; i+= 3) {
 			String lineInfo = arrayOfLines.get(i);
 			String lineLikes = arrayOfLines.get(i + 1);
 			String lineDislikes = arrayOfLines.get(i + 2);
@@ -58,16 +57,9 @@ public class Reader {
 				dislikes.add(dislike);
 			}
 
-			System.out.println("firstName: " + firstName);
-			System.out.println("lastName: " + lastName);
-			System.out.println("age: " + age);
-			System.out.println("gender: " + gender);
-			System.out.println("paranoia: " + paranoia);
-			System.out.println("likes: " + likes);
-			System.out.println("dislikes: " + dislikes);
-
 			Agent agent = new Agent(firstName,lastName,age,gender,paranoia,likes,dislikes);
 			this.agents.add(agent);
+			System.out.println("crashed here:62");
 		}
 	}
 
@@ -79,8 +71,8 @@ public class Reader {
 
 		int numberOfAgents = Integer.parseInt(tokens[0]);
 		int numberOfPassengers = Integer.parseInt(tokens[1]);
-		
-		for (int i = 1 + 3 * numberOfAgents;  i < 3 * numberOfPassengers + numberOfAgents; i++) {
+
+		for (int i = 1 + 3 * numberOfAgents;  i < 3 * numberOfAgents + numberOfPassengers; i++) {
 			String lineInfo = arrayOfLines.get(i);
 			tokens = lineInfo.split(delims);
 
@@ -93,15 +85,6 @@ public class Reader {
 			int dangerLevel = Integer.parseInt(tokens[6]);
 			boolean isThreat = intToBool(Integer.parseInt(tokens[7]));
 
-			System.out.println("firstName: " + firstName);
-			System.out.println("lastName: " + lastName);
-			System.out.println("age: " + age);
-			System.out.println("gender: " + gender);
-			System.out.println("origin: " + origin);
-			System.out.println("species: " + species);
-			System.out.println("dangerLevel: " + dangerLevel);
-			System.out.println("isThreat" + isThreat);
-
 			Passenger passenger = new Passenger(firstName, lastName, age, gender, origin, species, dangerLevel, isThreat);
 			this.passengers.add(passenger);
 		}
@@ -112,14 +95,20 @@ public class Reader {
 			return true;
 		} else {
 			return false;
-		}
+		}}
+
+	public void sortAgents() {
+		Collections.sort(this.agents);
+		Collections.reverse(this.agents);
 	}
+
 
 	public static void main (String[] args) throws IOException{
 		Reader reader = new Reader();
 		reader.buildAgents();
 		reader.buildPassengers();
 		System.out.println(reader.agents); 
-		System.out.println(reader.passengers);
+		reader.sortAgents();
+		System.out.println(reader.agents);
 	}
 }
