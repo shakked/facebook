@@ -79,13 +79,11 @@ public class Reader {
 
 		int numberOfAgents = Integer.parseInt(tokens[0]);
 		int numberOfPassengers = Integer.parseInt(tokens[1]);
-		// Name LastName age     gender origin species dangerLevel isThreat
-		// Great Cthulhu 5253993   4      22       25     10         1
-
+		
 		for (int i = 1 + 3 * numberOfAgents;  i < 3 * numberOfPassengers + numberOfAgents; i++) {
 			String lineInfo = arrayOfLines.get(i);
-
 			tokens = lineInfo.split(delims);
+
 			String firstName = tokens[0];
 			String lastName = tokens[1];
 			int age = Integer.parseInt(tokens[2]);
@@ -107,7 +105,6 @@ public class Reader {
 			Passenger passenger = new Passenger(firstName, lastName, age, gender, origin, species, dangerLevel, isThreat);
 			this.passengers.add(passenger);
 		}
-
 	}
 
 	public boolean intToBool(int intToBeConverted) {
@@ -118,13 +115,11 @@ public class Reader {
 		}
 	}
 
-
 	public static void main (String[] args) throws IOException{
 		Reader reader = new Reader();
 		reader.buildAgents();
 		reader.buildPassengers();
 		System.out.println(reader.agents); 
 		System.out.println(reader.passengers);
-
 	}
 }

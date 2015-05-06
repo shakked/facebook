@@ -52,7 +52,7 @@ public class Agent {
 	}
 
 	public String toString() {
-		String string = "Agent: " + firstName + " " + lastName + ", " + age + " years old, " + paranoiaLevel + "paranoia level" + "likes: " + likes + " and dislikes: " + dislikes;
+		String string = "\n{ Agent: " + firstName + " " + lastName + "\nage: " + age + "\nparanoia level: " + paranoiaLevel + "\nlikes: " + likes + "\ndislikes: " + dislikes + "}\n";
 		return string; 
 	}
 

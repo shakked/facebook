@@ -46,7 +46,7 @@ public class Passenger {
 	}
 
 	public String toString() { 
-		String description = "Passenger: " + firstName + " " + lastName + " age: " + age + " gender: " + gender + " origin: " + origin + " species: " + species + " dangerLevel: " + dangerLevel + " isThreat: " + isThreat;
+		String description = "\n{ Passenger: " + firstName + " " + lastName + "\nage: " + age + "\ngender: " + gender + "\norigin: " + origin + "\nspecies: " + species + "\ndangerLevel: " + dangerLevel + "\nisThreat: " + isThreat+ " }\n";
 		return description;
 	}
 
