@@ -1,3 +1,7 @@
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.*;
 public class Passenger implements Comparable<Passenger>{
 	public String firstName;
 	public String lastName;
@@ -7,6 +11,9 @@ public class Passenger implements Comparable<Passenger>{
 	public String species;
 	public int dangerLevel;
 	public boolean isThreat;
+
+	public static final String [] traits = {"Female", "Male", "Transgendered", "Hermaphrodite", "Epicene", "USA", "Canada", "Central America", "South America", "Western Europe", "Eastern Europe", "Middle Eastern", "North African", "African", "South Asian", "South East Asian", "Asian", "Aussie", "Kiwi", "Polynesian", "Outer Space", "Antarctican", "Lowest levels of the deep sea", "human", "alien", "ancients", "monster", "mutants"};
+
 
 	public Passenger() {
 
@@ -59,4 +66,30 @@ public class Passenger implements Comparable<Passenger>{
 			return -1;
 		}  
    }
+
+   public int getOriginAsInt () {
+   		return Arrays.asList(this.traits).indexOf(this.origin);
+   }
+
+   public int getSpeciesAsInt () {
+   		return Arrays.asList(this.traits).indexOf(this.species);
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

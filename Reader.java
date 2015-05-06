@@ -8,7 +8,7 @@ public class Reader {
 	public static final String [] traits = {"Female", "Male", "Transgendered", "Hermaphrodite", "Epicene", "USA", "Canada", "Central America", "South America", "Western Europe", "Eastern Europe", "Middle Eastern", "North African", "African", "South Asian", "South East Asian", "Asian", "Aussie", "Kiwi", "Polynesian", "Outer Space", "Antarctican", "Lowest levels of the deep sea", "human", "alien", "ancients", "monster", "mutants"};
 	public ArrayList<Agent> agents = new ArrayList<Agent>();
 	public ArrayList<Passenger> passengers = new ArrayList<Passenger>();
-	public ArrayList<PriorityQueue<Passenger>> lines = new ArrayList<PriorityQueue<Passenger>>();
+	public ArrayList<TSALine> lines = new ArrayList<TSALine>();
 
 	public ArrayList<String> arrayOfLinesForFileName(String fileName) throws IOException {
 		DataInputStream input = new DataInputStream(new FileInputStream(fileName));
@@ -73,7 +73,7 @@ public class Reader {
 		int numberOfAgents = Integer.parseInt(tokens[0]);
 		int numberOfPassengers = Integer.parseInt(tokens[1]);
 
-		for (int i = 1 + 3 * numberOfAgents;  i < 3 * numberOfAgents + numberOfPassengers; i++) {
+		for (int i = 1 + 3 * numberOfAgents;  i <= 3 * numberOfAgents + numberOfPassengers; i++) {
 			String lineInfo = arrayOfLines.get(i);
 			tokens = lineInfo.split(delims);
 
@@ -103,16 +103,20 @@ public class Reader {
 		Collections.reverse(this.agents);
 	}
 
-	public void buildLines() {
+	public void createLinesAndSetAgents() {
 		for (int i = 0; i < this.agents.length; i++) {
-			PriorityQueue priorityQueue = new PriorityQueue<Passenger>();
-			this.lines.add(priorityQueue);
+			TSALine line = new TSALine(this.agents[i]);
+			this.lines.add(line);
 		}
+	}
 
-		for (int j = 0; i < this.passengers.length; j++) {
-			
+	public void addPassengersToLines() {
+		for (int i = 0; i < passengers.length; i++) {
+			// index = (age - gender + origin + species) % t  (where t is the number of lines, or TSA agents)
+			Passenger passenger = this.passengers.get(i);
+			int indexOfLineForPassenger = (passenger.age - passenger.gender + passenger.getOriginAsInt + passenger.getSpeciesAsInt) % this.lines.length;
+			TSALine line = this.lines.get(indexOfLineForPassenger);
 		}
-
 	}
 
 
@@ -122,6 +126,8 @@ public class Reader {
 		reader.buildPassengers();
 		System.out.println(reader.agents); 
 		reader.sortAgents();
-		System.out.println(reader.agents);
+		System.out.println(reader.passengers);
+
+
 	}
 }
