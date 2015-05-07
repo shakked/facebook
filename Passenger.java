@@ -3,12 +3,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
 public class Passenger implements Comparable<Passenger>{
-	public String firstName;
-	public String lastName;
-	public int age;
-	public int gender;
-	public String origin;
-	public String species;
+public String firstName;
+public String lastName;
+public int age;
+public int gender;
+public String origin;
+public String species;
 	public int dangerLevel;
 	public boolean isThreat;
 
@@ -29,7 +29,7 @@ public class Passenger implements Comparable<Passenger>{
 		if (age <= 0) {
 			age = 5;
 		}
-		if (gender != 1 && gender != 0) {
+		if (gender < 0) {
 			gender = 1;
 		}
 		if (origin == null || origin.length() <= 0) {
@@ -60,7 +60,7 @@ public class Passenger implements Comparable<Passenger>{
 	public int compareTo(Passenger passenger){
 		if(this.dangerLevel == passenger.dangerLevel) {
 			return 0;  
-		} else if(this.dangerLevel > passenger.dangerLevel) {
+		} else if(this.dangerLevel < passenger.dangerLevel) {
 			return 1;
 		} else {
 			return -1;

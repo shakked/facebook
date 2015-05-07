@@ -60,7 +60,6 @@ public class Reader {
 
 			Agent agent = new Agent(firstName,lastName,age,gender,paranoia,likes,dislikes);
 			this.agents.add(agent);
-			System.out.println("crashed here:62");
 		}
 	}
 
@@ -71,6 +70,7 @@ public class Reader {
 		String[] tokens = firstLine.split(delims);
 
 		int numberOfAgents = Integer.parseInt(tokens[0]);
+
 		int numberOfPassengers = Integer.parseInt(tokens[1]);
 
 		for (int i = 1 + 3 * numberOfAgents;  i <= 3 * numberOfAgents + numberOfPassengers; i++) {
@@ -104,30 +104,50 @@ public class Reader {
 	}
 
 	public void createLinesAndSetAgents() {
-		for (int i = 0; i < this.agents.length; i++) {
-			TSALine line = new TSALine(this.agents[i]);
+		for (int i = 0; i < this.agents.size(); i++) {
+			TSALine line = new TSALine(this.agents.get(i));
 			this.lines.add(line);
+			System.out.println(line.agent.firstName + " " + line.agent.lastName + "(" + line.agent.age + ") is being assigned to line " + i);
 		}
 	}
 
 	public void addPassengersToLines() {
-		for (int i = 0; i < passengers.length; i++) {
+		for (int i = 0; i < passengers.size(); i++) {
 			// index = (age - gender + origin + species) % t  (where t is the number of lines, or TSA agents)
 			Passenger passenger = this.passengers.get(i);
-			int indexOfLineForPassenger = (passenger.age - passenger.gender + passenger.getOriginAsInt + passenger.getSpeciesAsInt) % this.lines.length;
+			int indexOfLineForPassenger = (passenger.age - passenger.gender + passenger.getOriginAsInt() + passenger.getSpeciesAsInt()) % this.agents.size();
 			TSALine line = this.lines.get(indexOfLineForPassenger);
+			line.passengers.add(passenger);
 		}
+
+		for (int i = 0; i < this.lines.size(); i++) {
+			this.lines.get(i).buildQueue();
+		}
+		//you added all the passengers to their corresponding lines without testing it, you now have to build the passengerLines into a priority queue
+		//
 	}
 
-
 	public static void main (String[] args) throws IOException{
+		System.out.println("\n\n Starting TSA Simulation.... w00t");
 		Reader reader = new Reader();
 		reader.buildAgents();
 		reader.buildPassengers();
-		System.out.println(reader.agents); 
 		reader.sortAgents();
-		System.out.println(reader.passengers);
+		reader.createLinesAndSetAgents();
+		reader.addPassengersToLines();
+		for (int i = 0; i < reader.lines.size(); i++) {
+			TSALine line = reader.lines.get(i);
+			for (int j = 0; j < line.passengers.size(); j++) {
 
-
+				Passenger passenger = line.priorityQueue.poll();
+				boolean shouldInterrogate = line.shouldInterrogate(passenger);
+				if (shouldInterrogate) {
+					System.out.println(passenger.firstName + " " + passenger.lastName + " is being interrogated.");
+				} else {
+					System.out.println(passenger.firstName + " " + passenger.lastName + " is moving on without interrogation.");
+				}
+			}
+		}
+		System.out.println("\n Done with TSA Simulation.... w00t\n\n");
 	}
 }
